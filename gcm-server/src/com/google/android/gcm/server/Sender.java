@@ -36,13 +36,6 @@ import static com.google.android.gcm.server.Constants.TOKEN_CANONICAL_REG_ID;
 import static com.google.android.gcm.server.Constants.TOKEN_ERROR;
 import static com.google.android.gcm.server.Constants.TOKEN_MESSAGE_ID;
 
-import com.google.android.gcm.server.Result.Builder;
-
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.IOException;
@@ -61,6 +54,13 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import com.google.android.gcm.server.Result.Builder;
+
 /**
  * Helper class to send messages to the GCM service using an API Key.
  */
@@ -72,6 +72,17 @@ public class Sender {
    * Initial delay before first retry, without jitter.
    */
   protected static final int BACKOFF_INITIAL_DELAY = 1000;
+  
+  /**
+   * HTTP connection timeout
+   */
+  protected static final int HTTP_URL_CONNECTION_CONNECT_TIMEOUT = 5000;
+  
+  /**
+   * HTTP read timeout
+   */
+  protected static final int HTTP_URL_CONNECTION_READ_TIMEOUT = 5000;
+  
   /**
    * Maximum delay before a retry.
    */
@@ -617,6 +628,8 @@ public class Sender {
    */
   protected HttpURLConnection getConnection(String url) throws IOException {
     HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+    conn.setConnectTimeout(HTTP_URL_CONNECTION_CONNECT_TIMEOUT);
+    conn.setReadTimeout(HTTP_URL_CONNECTION_READ_TIMEOUT);
     return conn;
   }
 
