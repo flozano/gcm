@@ -93,6 +93,8 @@ public class Sender {
       Logger.getLogger(Sender.class.getName());
 
   private final String key;
+  
+  private final String gcmSendEndpoint;
 
   /**
    * Default constructor.
@@ -100,7 +102,18 @@ public class Sender {
    * @param key API key obtained through the Google API Console.
    */
   public Sender(String key) {
+    this(key, GCM_SEND_ENDPOINT);
+  }
+
+  /**
+   * Extended constructor.
+   *
+   * @param key API key obtained through the Google API Console.
+   * @param gcmSendEndpoint url of the GCM Server. Comes in handy when using a mock server.
+   */
+  public Sender(String key, String gcmSendEndpoint) {
     this.key = nonNull(key);
+    this.gcmSendEndpoint = nonNull(gcmSendEndpoint);
   }
 
   /**
@@ -198,7 +211,7 @@ public class Sender {
     HttpURLConnection conn;
     int status;
     try {
-      conn = post(GCM_SEND_ENDPOINT, requestBody);
+      conn = post(gcmSendEndpoint, requestBody);
       status = conn.getResponseCode();
     } catch (IOException e) {
       logger.log(Level.FINE, "IOException posting to GCM", e);
@@ -420,7 +433,7 @@ public class Sender {
     HttpURLConnection conn;
     int status;
     try {
-      conn = post(GCM_SEND_ENDPOINT, "application/json", requestBody);
+      conn = post(gcmSendEndpoint, "application/json", requestBody);
       status = conn.getResponseCode();
     } catch (IOException e) {
       logger.log(Level.FINE, "IOException posting to GCM", e);
