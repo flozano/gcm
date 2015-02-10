@@ -1,19 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <modelVersion>4.0.0</modelVersion>
-        
+
         <groupId>com.flozano.com.google.android.gcm</groupId>
         <artifactId>gcm-parent</artifactId>
-        
-        <version>1.0.3-SNAPSHOT</version>
+
+        <version>1.0.3</version>
         <packaging>pom</packaging>
         <name>GCM parent</name>
 
         <modules>
                 <module>gcm-server</module>
-                <!--
-                <module>gcm-client</module>
-                -->
         </modules>
 
         <build>

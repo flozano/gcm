@@ -4,9 +4,9 @@
         <parent>
                 <groupId>com.flozano.com.google.android.gcm</groupId>
                 <artifactId>gcm-parent</artifactId>
-                <version>1.0.3-SNAPSHOT</version>
+                <version>1.0.3</version>
         </parent>
-        
+
         <artifactId>gcm-server</artifactId>
         <name>GCM server</name>
 
